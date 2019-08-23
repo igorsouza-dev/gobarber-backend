@@ -111,7 +111,10 @@ class AppointmentController {
 
   async delete(req, res) {
     const appointment = await Appointment.findByPk(req.params.id, {
-      include: [{ model: User, as: 'provider', attributes: ['name', 'email'] }],
+      include: [
+        { model: User, as: 'provider', attributes: ['name', 'email'] },
+        { model: User, as: 'user', attributes: ['name'] },
+      ],
     });
 
     if (!appointment) {
@@ -137,10 +140,16 @@ class AppointmentController {
     appointment.canceled_at = new Date();
 
     await appointment.save(appointment);
+    const formattedDate = format(appointment.date, "MMMM do',' hh:mm a");
     await Mail.sendMail({
       to: `${appointment.provider.name} <${appointment.provider.email}>`,
       subject: 'Cancelled appointment',
-      text: 'A appointment was cancelled.',
+      template: 'cancellation',
+      context: {
+        provider: appointment.provider.name,
+        user: appointment.user.name,
+        date: formattedDate,
+      },
     });
     return res.json(appointment);
   }
