@@ -22,6 +22,7 @@ Starting the server
 ```
 $ yarn dev
 ```
+
 Adding dependency to project
 
 ```
@@ -34,7 +35,6 @@ Adding development dependency to project
 $ yarn add -D dependency-name
 ```
 
-
 Creating migrations
 
 ```
@@ -45,4 +45,10 @@ Running migrations
 
 ```
 $ yarn sequelize db:migrate
+```
+
+Running mongodb on Docker
+
+```
+docker run --name mongobarber -p 27017:27017 -d -t mongo
 ```
