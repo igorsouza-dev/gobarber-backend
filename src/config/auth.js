@@ -1,6 +1,6 @@
-import jwt_config from '../../jwt_secret';
+import secret_data from '../../secret_data';
 
 export default {
-  secret: jwt_config.jwt_secret,
+  secret: secret_data.jwt_secret,
   expiresIn: '7d',
 };

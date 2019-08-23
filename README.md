@@ -2,17 +2,25 @@
 
 Backend for the GoBarber Project.
 
-## JWT Authentication
+## JWT Authentication and mailing
 
-Before running the project, it's necessary to create a `jwt_secret.js` file at the root of the project.
+Before running the project, it's necessary to create a `secret_data.js` file at the root of the project.
 
 The file should contain:
 
 ```
 export default {
   jwt_secret:
-    'one_super_secret_string',
+    'super_secret_key',
+  mailer: {
+    host: 'some_hostname',
+    port: '2525',
+    user: 'some_user',
+    pass: 'some_password',
+    from: 'No reply <no-reply@company.com>',
+  },
 };
+
 ```
 
 ## CLI Commands

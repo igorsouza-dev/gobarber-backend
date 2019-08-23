@@ -1,4 +1,4 @@
 node_modules
 .vscode
-jwt_secret.js
+secret_data.js
 tmp/
