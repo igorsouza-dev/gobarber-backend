@@ -52,7 +52,13 @@ class AppointmentController {
     if (!provider) {
       return res
         .status(400)
-        .json({ error: 'Provider informed is not a provider. ' });
+        .json({ error: 'You can only make appointments with providers. ' });
+    }
+
+    if (provider.id === provider_id) {
+      return res
+        .status(400)
+        .json({ error: 'You can not make an appointment with yourself.' });
     }
 
     /**
