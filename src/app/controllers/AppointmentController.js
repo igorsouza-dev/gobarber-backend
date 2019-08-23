@@ -1,7 +1,8 @@
 import * as Yup from 'yup';
 import { startOfHour, parseISO, isBefore, format, subHours } from 'date-fns';
 
-import Mail from '../../lib/Mail';
+import Queue from '../../lib/Queue';
+import CancellationMail from '../jobs/CancellationMail';
 
 import Appointment from '../models/Appointment';
 import Notification from '../schemas/Notification';
@@ -140,17 +141,11 @@ class AppointmentController {
     appointment.canceled_at = new Date();
 
     await appointment.save(appointment);
-    const formattedDate = format(appointment.date, "MMMM do',' hh:mm a");
-    await Mail.sendMail({
-      to: `${appointment.provider.name} <${appointment.provider.email}>`,
-      subject: 'Cancelled appointment',
-      template: 'cancellation',
-      context: {
-        provider: appointment.provider.name,
-        user: appointment.user.name,
-        date: formattedDate,
-      },
+
+    await Queue.add(CancellationMail.key, {
+      appointment,
     });
+
     return res.json(appointment);
   }
 }

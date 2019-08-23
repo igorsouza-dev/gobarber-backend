@@ -31,6 +31,12 @@ Starting the server
 $ yarn dev
 ```
 
+Starting the queue server
+
+```
+$ yarn queue
+```
+
 Adding dependency to project
 
 ```
@@ -58,5 +64,11 @@ $ yarn sequelize db:migrate
 Running mongodb on Docker
 
 ```
-docker run --name mongobarber -p 27017:27017 -d -t mongo
+$ docker run --name mongobarber -p 27017:27017 -d -t mongo
+```
+
+Running redis on Docker
+
+```
+$ docker run --name redis-gobarber -p 6379:6379 -d -t redis:alpine
 ```
