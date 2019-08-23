@@ -1,6 +1,9 @@
 import * as Yup from 'yup';
-import { startOfHour, parseISO, isBefore } from 'date-fns';
+import { startOfHour, parseISO, isBefore, format } from 'date-fns';
+
 import Appointment from '../models/Appointment';
+import Notification from '../schemas/Notification';
+
 import User from '../models/User';
 import File from '../models/File';
 
@@ -84,6 +87,16 @@ class AppointmentController {
       user_id: req.userId,
       provider_id,
       date,
+    });
+
+    /**
+     * Notify appointment provider
+     */
+    const user = await User.findByPk(req.userId);
+    const formattedDate = format(hourStart, "MMMM do',' hh:mm a");
+    await Notification.create({
+      content: `New appointment made for ${user.name} at ${formattedDate}`,
+      user: provider_id,
     });
     return res.json(appointment);
   }
