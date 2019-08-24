@@ -1,14 +1,12 @@
-import secret_data from '../../secret_data';
-
 export default {
-  host: secret_data.mailer.host,
-  port: secret_data.mailer.port,
+  host: process.env.MAIL_HOST,
+  port: process.env.MAIL_PORT,
   secure: false,
   auth: {
-    user: secret_data.mailer.user,
-    pass: secret_data.mailer.pass,
+    user: process.env.MAIL_PORT,
+    pass: process.env.MAIL_PASS,
   },
   default: {
-    from: secret_data.mailer.from,
+    from: process.env.MAIL_FROM,
   },
 };

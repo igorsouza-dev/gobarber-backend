@@ -1,6 +1,4 @@
-import secret_data from '../../secret_data';
-
 export default {
-  secret: secret_data.jwt_secret,
+  secret: process.env.APP_SECRET,
   expiresIn: '7d',
 };

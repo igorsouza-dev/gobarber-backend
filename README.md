@@ -2,26 +2,9 @@
 
 Backend for the GoBarber Project.
 
-## JWT Authentication and mailing
+## Before starting
 
-Before running the project, it's necessary to create a `secret_data.js` file at the root of the project.
-
-The file should contain:
-
-```
-export default {
-  jwt_secret:
-    'super_secret_key',
-  mailer: {
-    host: 'some_hostname',
-    port: '2525',
-    user: 'some_user',
-    pass: 'some_password',
-    from: 'No reply <no-reply@company.com>',
-  },
-};
-
-```
+You should copy the `.env.example` and rename it to `.env`. Fill the variables with your data.
 
 ## CLI Commands
 
