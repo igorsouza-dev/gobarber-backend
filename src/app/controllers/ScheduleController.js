@@ -2,7 +2,6 @@ import { startOfDay, endOfDay, parseISO } from 'date-fns';
 import { Op } from 'sequelize';
 import Appointment from '../models/Appointment';
 import User from '../models/User';
-import File from '../models/File';
 
 class ScheduleController {
   async index(req, res) {
@@ -25,6 +24,13 @@ class ScheduleController {
         canceled_at: null,
         date: { [Op.between]: [dateStart, dateEnd] },
       },
+      include: [
+        {
+          model: User,
+          as: 'user',
+          attributes: ['name'],
+        },
+      ],
       order: ['date'],
     });
     return res.json(appointments);
